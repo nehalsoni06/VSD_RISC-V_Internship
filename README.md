@@ -135,7 +135,7 @@ Sum from 1 to 9 is 45
 
 ### Screenshot
 
-![GCC Output](screeshots/Screenshots(66).png)
+![GCC Output](screeshots/Screenshot(66).png)
 
 ---
 
