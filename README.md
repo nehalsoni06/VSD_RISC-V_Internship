@@ -1,40 +1,36 @@
-# Task 1: Understanding Software Modelling, Compilation, and Verification Using GCC and RISC-V Toolchains
+# Task 1: Software Modelling and Verification Using GCC and RISC-V Toolchains
 
 ## Overview
 
-In digital system design, hardware is rarely developed directly from an idea. The functionality of a system is first described and verified using software models before being translated into hardware. This approach helps identify and eliminate functional errors early in the design cycle, reducing development time and cost.
+Digital system design begins with creating a software model that describes the intended functionality of a system. Before moving to hardware implementation, this model is verified to ensure correct behavior. This approach helps identify functional errors early in the design process and forms the foundation of modern VLSI and SoC design methodologies.
 
-The objective of this task is to understand this fundamental concept by creating a software model in C, compiling it using both the native GCC compiler and the RISC-V cross-compiler, and comparing the outputs. A Fibonacci Series program is used as a simple example to demonstrate the workflow.
+In this task, a simple C program is used to demonstrate software modelling, compilation, verification, and cross-compilation using both the native GCC compiler and the RISC-V toolchain.
 
 ---
 
 ## Theory
 
-### Software Modelling in Digital Design
+### Software Modelling
 
-Before implementing a design in hardware, its functionality is represented using a high-level software model. This model serves as a reference specification that describes the expected behavior of the system.
-
-The software model is verified through simulation and testing before proceeding to hardware design.
+A software model acts as a reference specification for the desired functionality of a system. The model is verified before proceeding to hardware implementation.
 
 ```text
 Specification Model (C Program)
             ↓
       Verification
             ↓
-      RTL Design
+        RTL Design
             ↓
-      Hardware
+      Hardware Design
 ```
 
-This methodology ensures that the functionality is validated before moving to more complex stages of implementation.
+The purpose of verification is to ensure that the design behaves exactly as intended before additional complexity is introduced.
 
 ---
 
 ### Chip Modelling and Verification
 
-Chip modelling begins with a specification written in a high-level language such as C. The specification acts as a reference model against which future implementations can be verified.
-
-A testbench is used to provide inputs and observe outputs.
+The functionality of a design is first represented using a high-level programming language such as C. This model is then tested using different inputs to verify its correctness.
 
 ```text
 Specification Model
@@ -44,33 +40,21 @@ Specification Model
  Functional Verification
 ```
 
-The purpose of verification is to ensure that the system behaves exactly as intended.
-
----
-
-### RTL Design
-
-After validating the software model, the design is represented in RTL (Register Transfer Level) using hardware description languages such as Verilog.
-
-```text
-C Specification
-       ↓
-RTL Model
-       ↓
-Hardware Implementation
-```
-
-The RTL model should produce results identical to those produced by the specification model.
+Once the functionality is verified, the same behavior can be implemented in hardware using RTL.
 
 ---
 
 ### RISC-V Toolchain
 
-RISC-V is an open-standard Instruction Set Architecture (ISA) used for processor design and embedded systems development.
+RISC-V is an open-source Instruction Set Architecture (ISA) widely used in processor and embedded system design.
 
-The RISC-V toolchain allows software to be compiled and tested for RISC-V processors without requiring physical hardware.
+The RISC-V toolchain enables developers to:
 
-Components used in this task:
+* Compile software for the RISC-V architecture.
+* Simulate execution without physical hardware.
+* Verify functionality across different architectures.
+
+Tools used in this task:
 
 * GCC Compiler
 * RISC-V GCC Cross Compiler
@@ -78,204 +62,214 @@ Components used in this task:
 
 ---
 
-## Task Objective
+## Objective
 
-The purpose of this task is to:
+The objective of this task is to:
 
 * Understand software modelling concepts.
 * Learn the compilation process.
-* Explore cross-compilation for RISC-V architecture.
-* Verify functionality across different architectures.
-* Gain familiarity with the RISC-V development workflow.
+* Explore cross-compilation for RISC-V.
+* Verify program functionality across architectures.
+* Gain hands-on experience with the RISC-V development workflow.
 
 ---
 
-## Example Program: Fibonacci Series
+## Program Used for Analysis
 
-To demonstrate the concepts discussed above, a simple Fibonacci Series program is used.
-
-The Fibonacci sequence is a mathematical sequence where each term is the sum of the previous two terms.
-
-### Sequence
-
-```text
-0 1 1 2 3 5 8 13 ...
-```
+To demonstrate the workflow, a simple C program is used to calculate the sum of natural numbers from 1 to N.
 
 ### Source Code
 
 ```c
 #include <stdio.h>
 
-int main() {
-    int n = 4, a = 0, b = 1, c;
+int main(){
 
-    printf("Fibonacci Series: ");
+  int i, sum=0, n=9;
 
-    for(int i = 0; i < n; i++) {
-        printf("%d ", a);
-        c = a + b;
-        a = b;
-        b = c;
-    }
+  for(i=1;i<=n;i++)
+    sum = sum + i;
 
-    return 0;
+  printf("Sum from 1 to %d is %d\n",n,sum);
+
+  return 0;
+
 }
 ```
 
+### Expected Result
+
+For N = 9:
+
+```text
+1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 = 45
+```
+
+This example includes:
+
+* Variable initialization
+* Arithmetic operations
+* Loop execution
+* Output generation
+
+making it suitable for understanding compilation and verification workflows.
+
 ---
 
-## Compiling and Running with GCC
+# Compilation and Execution Using GCC
 
-The first step is to compile and execute the program using the native GCC compiler.
+The program is first compiled and executed using the native GCC compiler.
 
 ### Commands
 
 ```bash
-gcc fibonacci.c
+gcc sum1ton.c
 ./a.out
 ```
 
 ### Output
 
 ```text
-Fibonacci Series: 0 1 1 2
+Sum from 1 to 9 is 45
 ```
 
 ### Screenshot
 
-> Insert GCC compilation and output screenshot here.
+> Add screenshot of GCC compilation and execution output here.
 
 ---
 
-## Modifying the Program
+# Modifying the Program
 
-To observe changes in program behavior, the value of `n` is modified from `4` to `6`.
+To observe the effect of changing program inputs, the value of `n` is modified from **9** to **19**.
 
-### Editing the Source Code
+### Editing the Source File
 
 ```bash
-gedit fibonacci.c
+gedit sum1ton.c
 ```
 
 ### Modification
 
 ```c
-int n = 6;
+int i, sum = 0, n = 19;
 ```
 
 ### Recompile and Execute
 
 ```bash
-gcc fibonacci.c
+gcc sum1ton.c
 ./a.out
 ```
 
 ### Output
 
 ```text
-Fibonacci Series: 0 1 1 2 3 5
+Sum from 1 to 19 is 190
 ```
 
 ### Screenshot
 
-> Insert modified code and output screenshot here.
+> Add screenshot showing code modification and updated output here.
 
 ---
 
-## Cross Compilation Using RISC-V
+# Cross Compilation Using RISC-V
 
-The same program is now compiled for the RISC-V architecture.
+The same source code is compiled for the RISC-V architecture using the RISC-V GCC cross-compiler.
 
 ### Compilation
 
 ```bash
-riscv64-unknown-elf-gcc -o fibonacci.o fibonacci.c
+riscv64-unknown-elf-gcc -o sum1ton.o sum1ton.c
 ```
 
-### Execution Using Spike
+### Execution Using Spike Simulator
 
 ```bash
-spike pk fibonacci.o
+spike pk sum1ton.o
 ```
 
 ### Output
 
 ```text
-Fibonacci Series: 0 1 1 2 3 5
+Sum from 1 to 19 is 190
 ```
 
 ### Screenshot
 
-> Insert RISC-V compilation and execution screenshot here.
+> Add screenshot of RISC-V compilation and Spike execution here.
 
 ---
 
-## Understanding What Happened
+# Understanding the Workflow
 
-Although the same source code was used throughout the task, two different compilers generated machine code for two different architectures.
-
-### GCC Flow
+The complete workflow followed during this task is shown below:
 
 ```text
 C Program
     ↓
- GCC Compiler
+Compiler
+(GCC / RISC-V GCC)
     ↓
-x86 Machine Code
-    ↓
-Execution
-```
-
-### RISC-V Flow
-
-```text
-C Program
-    ↓
-RISC-V Compiler
-    ↓
-RISC-V Machine Code
-    ↓
-Spike Simulator
+Machine Code
     ↓
 Execution
+(Native System / Spike Simulator)
+    ↓
+Output Verification
 ```
 
-Even though the generated machine instructions are different, the functionality remains the same.
-
-This demonstrates one of the most important principles of software modelling:
-
-> A specification should remain functionally correct regardless of the target architecture.
+Although different machine instructions are generated for different architectures, the functionality of the program remains unchanged.
 
 ---
 
-## Observations
+# Toolchain Analysis
 
-* The Fibonacci program compiled successfully using both GCC and RISC-V compilers.
-* Changing the value of `n` produced the expected increase in sequence length.
-* Both toolchains generated identical outputs.
-* Spike successfully simulated execution of the RISC-V binary.
-* The functionality of the program remained unchanged across architectures.
-* The experiment demonstrated how a software model can be verified before moving towards hardware implementation.
+## GCC Compiler
+
+* Produces machine code for the host architecture.
+* Used for native software development.
+* Allows quick verification of program functionality.
+
+## RISC-V GCC Compiler
+
+* Cross-compiles source code for the RISC-V ISA.
+* Generates architecture-specific machine instructions.
+* Enables software development for RISC-V processors.
+
+## Spike Simulator
+
+* Reference simulator for the RISC-V ISA.
+* Executes RISC-V binaries without requiring physical hardware.
+* Useful for testing and verification during development.
 
 ---
 
-## Key Learnings
+# Observations
 
-* Understanding software modelling in digital design.
-* Importance of verification before hardware implementation.
-* Basics of GCC compilation.
+* The program compiled and executed successfully using both GCC and the RISC-V toolchain.
+* Modifying the value of `n` changed the output as expected.
+* Both compilation environments produced identical results.
+* Spike successfully simulated the execution of the RISC-V binary.
+* Program functionality remained consistent across architectures.
+
+---
+
+# Key Learnings
+
+* Understanding software modelling and verification.
+* Compiling C programs using GCC.
+* Editing source files using Gedit.
 * Cross-compilation using the RISC-V toolchain.
-* Execution of RISC-V binaries using Spike.
-* Relationship between software models and hardware design.
-* Functional equivalence across different architectures.
+* Executing RISC-V binaries using Spike.
+* Verifying software functionality before hardware implementation.
+* Understanding architecture-independent program behavior.
 
 ---
 
-## Conclusion
+# Conclusion
 
-This task introduced the fundamental workflow used in digital system design: modelling, compilation, verification, and validation.
+This task introduced the fundamental concepts of software modelling, compilation, and verification used in digital system design. A simple C program was used as a specification model and executed using both GCC and the RISC-V toolchain.
 
-Using a Fibonacci Series program as a software model, the program was compiled and executed using both GCC and the RISC-V toolchain. The outputs obtained from both environments were identical, confirming that the functionality of the specification remained unchanged across architectures.
-
-The task provided practical exposure to software modelling, cross-compilation, and simulation while demonstrating how functionality is verified before progressing towards hardware implementation. These concepts form the foundation of processor design, digital VLSI development, and the broader System-on-Chip (SoC) design flow.
+The outputs obtained from both environments were identical, demonstrating that the functionality of the program remained unchanged despite targeting different architectures. This exercise provided practical exposure to the RISC-V development workflow and highlighted the importance of verification before moving toward hardware implementation.
