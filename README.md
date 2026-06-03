@@ -135,7 +135,7 @@ Sum from 1 to 9 is 45
 
 ### Screenshot
 
-> Add screenshot of GCC compilation and execution output here.
+![GCC Output](screeshots/Screenshots(66).png)
 
 ---
 
