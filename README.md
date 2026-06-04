@@ -233,7 +233,7 @@ The `-O1` optimization level performs basic optimizations such as:
 
 ### Screenshot
 
-> Add O1 optimization screenshot here.
+![Original C code](screenshots/Screenshot\(78\).png)
 
 ---
 
@@ -288,7 +288,8 @@ riscv64-unknown-elf-objdump -d sum1ton_O1.o | less
 
 ### Screenshot
 
-> Add disassembly screenshot here.
+#### For O1
+
 
 ---
 
