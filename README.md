@@ -4,7 +4,7 @@
 
 Digital system design begins with creating a software model that describes the intended functionality of a system. Before moving to hardware implementation, this model is verified to ensure correct behavior. This approach helps identify functional errors early in the design process and forms the foundation of modern VLSI and SoC design methodologies.
 
-In this task, a simple C program is used to demonstrate software modelling, compilation, verification, and cross-compilation using both the native GCC compiler and the RISC-V toolchain.
+In this task, a simple C program is used to demonstrate software modelling, compilation, verification, optimization, disassembly, and cross-compilation using both the native GCC compiler and the RISC-V toolchain.
 
 ---
 
@@ -52,12 +52,14 @@ The RISC-V toolchain enables developers to:
 
 * Compile software for the RISC-V architecture.
 * Simulate execution without physical hardware.
+* Analyze generated machine instructions.
 * Verify functionality across different architectures.
 
 Tools used in this task:
 
 * GCC Compiler
 * RISC-V GCC Cross Compiler
+* Object Dump Utility
 * Spike Simulator
 
 ---
@@ -66,11 +68,13 @@ Tools used in this task:
 
 The objective of this task is to:
 
-* Understand software modelling concepts.
-* Learn the compilation process.
-* Explore cross-compilation for RISC-V.
-* Verify program functionality across architectures.
-* Gain hands-on experience with the RISC-V development workflow.
+* Understand software modelling and verification concepts.
+* Learn the compilation and execution workflow.
+* Explore cross-compilation for the RISC-V architecture.
+* Understand compiler optimization using `-O1` and `-Ofast`.
+* Analyze RISC-V instructions through disassembly.
+* Verify program functionality across different architectures.
+* Gain hands-on experience with the RISC-V development toolchain.
 
 ---
 
@@ -96,7 +100,8 @@ int main(){
 
 }
 ```
-![Original C code](screenshots/Screenshot(68).png)
+
+![Original C code](screenshots/Screenshot\(68\).png)
 
 ### Expected Result
 
@@ -136,20 +141,22 @@ Sum from 1 to 9 is 45
 
 ### Screenshot
 
-![GCC Output](screenshots/Screenshot(66).png)
+![GCC Output](screenshots/Screenshot\(66\).png)
 
 ---
 
 # Modifying the Program
 
-To observe the effect of changing program inputs, the value of `n` is modified from **9** to **19**.
+To observe the effect of changing program inputs, the value of `n` is modified.
 
 ### Editing the Source File
 
 ```bash
 gedit sum1ton.c
 ```
-![gedit](screenshots/Screenshot(67).png)
+
+![gedit](screenshots/Screenshot\(67\).png)
+
 ### Modification
 
 ```c
@@ -171,8 +178,9 @@ Sum from 1 to 15 is 120
 
 ### Screenshot
 
-![Changed code](screenshots/Screenshot(69).png)
-![Changed Output](screenshots/Screenshot(70).png)
+![Changed code](screenshots/Screenshot\(69\).png)
+
+![Changed Output](screenshots/Screenshot\(70\).png)
 
 ---
 
@@ -200,7 +208,135 @@ Sum from 1 to 15 is 120
 
 ### Screenshot
 
-![RISC-V GCC Output](screenshots/Screenshot(71).png)
+![RISC-V GCC Output](screenshots/Screenshot\(71\).png)
+
+---
+
+# Compiler Optimization
+
+Compiler optimizations improve the efficiency of the generated machine code while preserving the functionality of the program.
+
+## O1 Optimization
+
+The program was compiled using the `-O1` optimization flag:
+
+```bash
+riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum1ton_O1.o sum1ton.c
+```
+
+The `-O1` optimization level performs basic optimizations such as:
+
+* Removing redundant instructions
+* Improving execution efficiency
+* Reducing code size
+* Maintaining program correctness
+
+### Screenshot
+
+> Add O1 optimization screenshot here.
+
+---
+
+## Ofast Optimization
+
+The program was also compiled using the `-Ofast` optimization flag:
+
+```bash
+riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton_fast.o sum1ton.c
+```
+
+`-Ofast` enables aggressive compiler optimizations aimed at maximizing performance.
+
+Benefits include:
+
+* Faster execution
+* More efficient instruction scheduling
+* Reduced execution overhead
+* Better runtime performance
+
+### Screenshot
+
+> Add Ofast optimization screenshot here.
+
+---
+
+# Disassembly and Instruction Analysis
+
+After compilation, the generated object file was disassembled to observe the RISC-V instructions produced by the compiler.
+
+## Commands
+
+```bash
+riscv64-unknown-elf-objdump -d sum1ton_O1.o
+```
+
+For easier navigation through large outputs:
+
+```bash
+riscv64-unknown-elf-objdump -d sum1ton_O1.o | less
+```
+
+### Useful Commands Inside Less
+
+| Command | Function                 |
+| ------- | ------------------------ |
+| Space   | Next page                |
+| b       | Previous page            |
+| /main   | Search for main function |
+| n       | Next occurrence          |
+| q       | Quit                     |
+
+### Screenshot
+
+> Add disassembly screenshot here.
+
+---
+
+## Common RISC-V Instructions Observed
+
+| Instruction | Description                            |
+| ----------- | -------------------------------------- |
+| addi        | Add Immediate                          |
+| auipc       | Add Upper Immediate to Program Counter |
+| jal         | Jump and Link                          |
+| ret         | Return from Function                   |
+| li          | Load Immediate                         |
+| sub         | Subtract                               |
+| beqz        | Branch if Equal to Zero                |
+| bnez        | Branch if Not Equal to Zero            |
+
+These instructions collectively implement the logic originally written in C.
+
+---
+
+# Comparing Optimization Levels
+
+Generate disassembly files:
+
+```bash
+riscv64-unknown-elf-objdump -d sum1ton_O1.o > O1.txt
+
+riscv64-unknown-elf-objdump -d sum1ton_fast.o > Ofast.txt
+```
+
+Compare both outputs:
+
+```bash
+diff O1.txt Ofast.txt
+```
+
+or
+
+```bash
+vimdiff O1.txt Ofast.txt
+```
+
+### Observation
+
+* Both optimization levels maintain functional correctness.
+* `-Ofast` generates more aggressively optimized machine code.
+* Different optimization levels affect implementation efficiency rather than functionality.
+* Disassembly helps visualize the impact of compiler optimizations on generated instructions.
 
 ---
 
@@ -209,20 +345,28 @@ Sum from 1 to 15 is 120
 The complete workflow followed during this task is shown below:
 
 ```text
-C Program
-    ↓
-Compiler
+C Source Code
+       ↓
+Compilation
 (GCC / RISC-V GCC)
-    ↓
-Machine Code
-    ↓
+       ↓
+Optimization
+(-O1 / -Ofast)
+       ↓
+Object File Generation
+       ↓
+Disassembly
+(objdump)
+       ↓
+RISC-V Instructions
+       ↓
 Execution
-(Native System / Spike Simulator)
-    ↓
+(Spike Simulator)
+       ↓
 Output Verification
 ```
 
-Although different machine instructions are generated for different architectures, the functionality of the program remains unchanged.
+This workflow demonstrates how a high-level C program is transformed into machine-executable instructions and verified before hardware implementation.
 
 ---
 
@@ -230,21 +374,27 @@ Although different machine instructions are generated for different architecture
 
 ## GCC Compiler
 
-* Produces machine code for the host architecture.
-* Used for native software development.
-* Allows quick verification of program functionality.
+* Compiles C programs for the host machine.
+* Generates executable machine code.
+* Used for functional verification of the software model.
 
 ## RISC-V GCC Compiler
 
-* Cross-compiles source code for the RISC-V ISA.
-* Generates architecture-specific machine instructions.
-* Enables software development for RISC-V processors.
+* Cross-compiles C programs for the RISC-V architecture.
+* Generates RISC-V specific machine instructions.
+* Supports optimization levels such as `-O1` and `-Ofast`.
+
+## Object Dump Utility
+
+* Disassembles compiled binaries into assembly code.
+* Helps analyze compiler-generated instructions.
+* Used to study instruction-level implementation.
 
 ## Spike Simulator
 
 * Reference simulator for the RISC-V ISA.
-* Executes RISC-V binaries without requiring physical hardware.
-* Useful for testing and verification during development.
+* Executes RISC-V binaries without physical hardware.
+* Used for testing and verification of RISC-V programs.
 
 ---
 
@@ -255,6 +405,11 @@ Although different machine instructions are generated for different architecture
 * Both compilation environments produced identical results.
 * Spike successfully simulated the execution of the RISC-V binary.
 * Program functionality remained consistent across architectures.
+* Compiler optimization flags (`-O1` and `-Ofast`) generated different assembly implementations while preserving functionality.
+* Disassembly revealed how high-level C code is translated into RISC-V instructions.
+* The `less` utility simplified navigation through large disassembly outputs.
+* Disassembly comparison highlighted differences between optimization levels.
+* Higher optimization levels improved code efficiency without changing the output.
 
 ---
 
@@ -262,16 +417,20 @@ Although different machine instructions are generated for different architecture
 
 * Understanding software modelling and verification.
 * Compiling C programs using GCC.
-* Editing source files using Gedit.
-* Cross-compilation using the RISC-V toolchain.
-* Executing RISC-V binaries using Spike.
-* Verifying software functionality before hardware implementation.
-* Understanding architecture-independent program behavior.
+* Cross-compiling programs for the RISC-V architecture.
+* Executing RISC-V binaries using Spike Simulator.
+* Exploring compiler optimization using `-O1` and `-Ofast`.
+* Understanding disassembly and instruction analysis.
+* Learning how C code is translated into RISC-V instructions.
+* Verifying functionality across different architectures.
+* Gaining exposure to the RISC-V development workflow.
 
 ---
 
 # Conclusion
 
-This task introduced the fundamental concepts of software modelling, compilation, and verification used in digital system design. A simple C program was used as a specification model and executed using both GCC and the RISC-V toolchain.
+This task introduced the fundamental concepts of software modelling, compilation, optimization, and verification used in digital system design. A simple C program was used as a specification model and executed using both GCC and the RISC-V toolchain.
 
-The outputs obtained from both environments were identical, demonstrating that the functionality of the program remained unchanged despite targeting different architectures. This exercise provided practical exposure to the RISC-V development workflow and highlighted the importance of verification before moving toward hardware implementation.
+The outputs obtained from both environments were identical, demonstrating that the functionality of the program remained unchanged despite targeting different architectures. Compiler optimizations using `-O1` and `-Ofast` further demonstrated how performance can be improved without affecting correctness.
+
+The task also provided an introduction to disassembly and instruction-level analysis, showing how high-level C code is translated into RISC-V machine instructions. Overall, this exercise provided practical exposure to the software development and verification workflow used in modern processor and VLSI design.
