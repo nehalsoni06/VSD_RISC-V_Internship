@@ -96,6 +96,7 @@ int main(){
 
 }
 ```
+![Original C code](screenshots/Screenshot(68).png)
 
 ### Expected Result
 
@@ -148,11 +149,11 @@ To observe the effect of changing program inputs, the value of `n` is modified f
 ```bash
 gedit sum1ton.c
 ```
-
+![gedit](screenshots/Screenshot(67).png)
 ### Modification
 
 ```c
-int i, sum = 0, n = 19;
+int i, sum = 0, n = 15;
 ```
 
 ### Recompile and Execute
@@ -165,12 +166,13 @@ gcc sum1ton.c
 ### Output
 
 ```text
-Sum from 1 to 19 is 190
+Sum from 1 to 15 is 120
 ```
 
 ### Screenshot
 
-> Add screenshot showing code modification and updated output here.
+![Changed code](screenshots/Screenshot(69).png)
+![Changed Output](screenshots/Screenshot(70).png)
 
 ---
 
@@ -193,12 +195,12 @@ spike pk sum1ton.o
 ### Output
 
 ```text
-Sum from 1 to 19 is 190
+Sum from 1 to 15 is 120
 ```
 
 ### Screenshot
 
-> Add screenshot of RISC-V compilation and Spike execution here.
+![RISC-V GCC Output](screenshots/Screenshot(71).png)
 
 ---
 
