@@ -290,7 +290,7 @@ riscv64-unknown-elf-objdump -d sum1ton_O1.o | less
 
 #### For O1
 ![disassembly for O1](screenshots/Screenshot\(79\).png)
-![main for O1](screenshots/Screenshot\(81\).png)
+![main for O1](screenshots/Screenshot\(88\).png)
 
 #### For Ofast
 ![disassembly Output for Ofast](screenshots/Screenshot\(83\).png)
