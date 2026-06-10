@@ -92,12 +92,6 @@ spike pk sum1ton.o
 Sum from 1 to 15 is 120
 ```
 
-### Screenshot
-
-![Original C code](screenshots/Screenshot\(90\).png)
-
----
-
 ## Spike Debug Mode
 
 To analyze program execution step-by-step:
@@ -108,9 +102,9 @@ spike -d pk sum1ton.o
 
 The simulator enters interactive debug mode.
 
-### Screenshot
+### Screenshot(Spike execution and Debud mode)
 
-> Add Spike debug mode screenshot here.
+![spike execution and Debug Mode](screenshots/Screenshot\(90\).png)
 
 ---
 
@@ -145,6 +139,15 @@ c
 ```text
 q
 ```
+### Screenshot(main file)
+
+![main file](screenshots/Screenshot\(83\).png)
+
+---
+### Screenshot( commands debug observations)
+
+![spike execution and Debug Mode](screenshots/Screenshot\(91\).png)
+![spike execution and Debug Mode](screenshots/Screenshot\(92\).png)
 
 ---
 
