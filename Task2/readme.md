@@ -94,7 +94,7 @@ Sum from 1 to 15 is 120
 
 ### Screenshot
 
-!(spike execution)[screenshots/Screenshote(90)
+![Original C code](screenshots/Screenshot\(90\).png)
 
 ---
 
