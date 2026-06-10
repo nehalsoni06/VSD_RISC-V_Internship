@@ -94,7 +94,7 @@ Sum from 1 to 15 is 120
 
 ### Screenshot
 
-> Add Spike execution screenshot here.
+!(spike execution)[screenshots/Screenshote(90)
 
 ---
 
