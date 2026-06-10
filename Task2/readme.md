@@ -29,7 +29,9 @@
 
 ## Overview
 
-Software models are commonly used as reference specifications before hardware implementation. These models are verified and analyzed to ensure correct functionality. In this task, Spike Simulator is used to understand RISC-V program execution and debugging, followed by verification of a Ring Counter program using both GCC and the RISC-V GCC compiler.
+Software modelling and verification are essential steps in the digital design workflow. Before implementing a design in hardware, its functionality is first represented and tested using software models. This helps identify errors early and ensures that the intended behavior is preserved throughout the design process.
+
+In this task, Spike Simulator is used to explore the execution and debugging of RISC-V programs at the instruction level. Additionally, a Ring Counter software model is compiled and verified using both the native GCC compiler and the RISC-V GCC toolchain to demonstrate architecture-independent functionality.
 
 ---
 
@@ -37,10 +39,10 @@ Software models are commonly used as reference specifications before hardware im
 
 ## Objective
 
-- Understand Spike Simulator and its debugging capabilities.
-- Analyze program execution at the instruction level.
-- Inspect register values during execution.
-- Understand how software executes on a RISC-V processor.
+- Understand the role of Spike Simulator in RISC-V development.
+- Learn instruction-level debugging and program analysis.
+- Observe register and program counter behavior during execution.
+- Gain practical experience with RISC-V software debugging.
 
 ---
 
@@ -92,6 +94,12 @@ spike pk sum1ton.o
 Sum from 1 to 15 is 120
 ```
 
+### Screenshot
+
+![Spike Execution](screenshots/Screenshot\(90\).png)
+
+---
+
 ## Spike Debug Mode
 
 To analyze program execution step-by-step:
@@ -102,9 +110,9 @@ spike -d pk sum1ton.o
 
 The simulator enters interactive debug mode.
 
-### Screenshot(Spike execution and Debud mode)
+### Screenshot
 
-![spike execution and Debug Mode](screenshots/Screenshot\(90\).png)
+![Main File](screenshots/Screenshot\(83\).png)
 
 ---
 
@@ -139,25 +147,22 @@ c
 ```text
 q
 ```
-### Screenshot(main file)
 
-![main file](screenshots/Screenshot\(83\).png)
+### Debug Observation Screenshots
 
----
-### Screenshot( commands debug observations)
+![Debug Observation 1](screenshots/Screenshot\(91\).png)
 
-![spike execution and Debug Mode](screenshots/Screenshot\(91\).png)
-![spike execution and Debug Mode](screenshots/Screenshot\(92\).png)
+![Debug Observation 2](screenshots/Screenshot\(92\).png)
 
 ---
 
 ## Observations from Debugging
 
-- Instructions are executed sequentially.
-- Register values change during execution.
-- The Program Counter (PC) updates after every instruction.
-- Spike enables instruction-level visibility of program behavior.
-- Debugging helps verify correct execution before hardware deployment.
+- Spike Simulator successfully executed the compiled RISC-V program.
+- Instructions were executed sequentially and could be analyzed individually.
+- Register values changed according to program execution.
+- The Program Counter (PC) advanced after each instruction.
+- Debug mode provided a deeper understanding of how software interacts with processor hardware.
 
 ---
 
@@ -165,15 +170,15 @@ q
 
 ## Objective
 
-The goal of this section is to verify that a Ring Counter software model produces identical functionality when compiled using both GCC and the RISC-V GCC compiler.
+The objective of this section is to verify the functionality of a Ring Counter software model using both GCC and the RISC-V GCC compiler. By comparing the outputs generated on different architectures, we can confirm the correctness and portability of the software model.
 
 ---
 
 ## Theory
 
-A Ring Counter is a sequential digital circuit formed using a shift register where the output of the last flip-flop is connected back to the input of the first flip-flop.
+A Ring Counter is a sequential digital circuit formed using a shift register where the output of the last stage is connected back to the input of the first stage.
 
-A single logic '1' circulates through the register positions, producing a repeating sequence of states.
+A single logic '1' continuously circulates through the register positions, creating a repeating sequence of states.
 
 ```text
 1000
@@ -187,12 +192,12 @@ A single logic '1' circulates through the register positions, producing a repeat
 1000
 ```
 
-Ring Counters are commonly used in:
+### Applications
 
 - Sequence generators
 - Timing circuits
 - Control units
-- Digital system synchronization
+- Digital synchronization systems
 
 ---
 
@@ -242,13 +247,13 @@ Ring Counter Sequence:
 0001
 ```
 
-The program models the behavior of a 4-bit Ring Counter and serves as the software specification for verification.
+### Screenshot
+
+![Ring Counter Code](screenshots/Screenshot\(94\).png)
 
 ---
 
 ## Compilation Using GCC
-
-Compile the program using the native GCC compiler.
 
 ```bash
 gcc ring_counter.c
@@ -272,27 +277,19 @@ Ring Counter Sequence:
 
 ### Screenshot
 
-> Add GCC compilation screenshot here.
+![GCC Output](screenshots/Screenshot\(95\).png)
 
 ---
 
 ## Cross Compilation Using RISC-V GCC
 
-Compile the same program for the RISC-V architecture.
-
 ```bash
 riscv64-unknown-elf-gcc -o ring_counter.o ring_counter.c
 ```
 
-### Screenshot
-
-> Add RISC-V compilation screenshot here.
-
 ---
 
 ## Executing on Spike Simulator
-
-Run the generated RISC-V executable.
 
 ```bash
 spike pk ring_counter.o
@@ -315,7 +312,7 @@ Ring Counter Sequence:
 
 ### Screenshot
 
-> Add Spike execution screenshot here.
+![RISC-V Compilation and Execution](screenshots/Screenshot\(96\).png)
 
 ---
 
@@ -334,18 +331,18 @@ Since both outputs are identical, the functionality of the Ring Counter model is
 
 ```text
 Ring Counter C Program
-            ↓
-      GCC Compiler
-            ↓
-      Native Output
+          ↓
+     GCC Compiler
+          ↓
+     Native Output
 
 Ring Counter C Program
-            ↓
-   RISC-V GCC Compiler
-            ↓
-      Spike Simulator
-            ↓
-      RISC-V Output
+          ↓
+ RISC-V GCC Compiler
+          ↓
+    Spike Simulator
+          ↓
+     RISC-V Output
 
 Native Output = RISC-V Output
 ```
@@ -368,37 +365,35 @@ Native Output = RISC-V Output
 
 - Executes RISC-V binaries.
 - Supports simulation and debugging.
-- Useful for verification without hardware.
+- Enables verification without physical hardware.
 
 ---
 
 ## Observations
 
-- The `sum1ton.c` program executed successfully in Spike Simulator.
-- Spike debug mode enabled instruction-by-instruction execution analysis.
-- Register values and program flow could be observed during runtime.
+- The `sum1ton.c` program executed correctly in Spike Simulator.
+- Debug mode enabled detailed analysis of instruction execution and register activity.
 - The Ring Counter program compiled successfully using both GCC and RISC-V GCC.
-- GCC and RISC-V GCC generated functionally equivalent executables.
-- Spike successfully executed the RISC-V binary.
-- The Ring Counter sequence remained identical across architectures.
-- Verification confirmed correct functionality of the software model.
+- Identical outputs were obtained from both compilation environments.
+- The functionality of the software model remained unchanged across architectures.
+- Spike Simulator provided an effective platform for testing and verification without requiring physical hardware.
+- The experiment demonstrated the importance of software verification before hardware implementation.
 
 ---
 
 ## Key Learnings
 
-- Spike simulation and debugging.
-- Register-level program analysis.
-- GCC compilation workflow.
-- RISC-V cross-compilation.
-- Digital system modelling.
-- Software verification techniques.
-- Architecture-independent functionality.
+- Understanding software modelling and verification concepts.
+- Learning RISC-V simulation and debugging using Spike.
+- Analyzing program execution at the instruction level.
+- Compiling programs using GCC and RISC-V GCC.
+- Verifying software functionality across different architectures.
+- Understanding the role of software verification in digital design workflows.
 
 ---
 
 ## Conclusion
 
-This task demonstrated two important aspects of the RISC-V software development workflow. In the first part, Spike Simulator was used to debug and analyze the execution of the `sum1ton.c` program at the instruction level. Register values, program flow, and execution behavior were observed using Spike's interactive debugging environment.
+This task provided practical exposure to the software development and verification flow used in modern digital design and embedded systems. Through Spike Simulator, the execution of a RISC-V program was analyzed at the instruction level, offering insight into processor behavior, register operations, and program flow.
 
-In the second part, a Ring Counter software model was compiled using both GCC and the RISC-V GCC compiler. The outputs obtained from both environments were identical, confirming correct functionality and successful verification of the software model. Together, these exercises provided practical exposure to simulation, debugging, and verification methodologies commonly used in processor design, embedded systems development, and VLSI workflows.
+The Ring Counter software model was then compiled and executed using both GCC and the RISC-V GCC toolchain. The identical outputs obtained from both environments confirmed the correctness and portability of the design. Overall, this task highlighted the importance of simulation, debugging, and verification as foundational steps before moving toward hardware implementation.
