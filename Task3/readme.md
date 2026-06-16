@@ -2,32 +2,29 @@
 
 # Table of Contents
 
-- [Objective](#objective)
-- [Introduction](#introduction)
-- [Why Virtual Machine Instead of GitHub Codespaces?](#why-virtual-machine-instead-of-github-codespaces)
-- [Step 1: Cloning the Repository](#step-1-cloning-the-repository)
-- [Step 2: Installing Prerequisites](#step-2-installing-prerequisites)
-- [Step 3: FPGA Toolchain Setup](#step-3-fpga-toolchain-setup)
-  - [Yosys](#yosys)
-  - [NextPNR](#nextpnr)
-  - [IceStorm](#icestorm)
-  - [GTKWave](#gtkwave)
-- [Step 4: Build Flow](#step-4-build-flow)
-  - [Build Verification Status](#build-verification-status)
-  - [Why the Makefile Was Not Modified](#why-the-makefile-was-not-modified)
-- [Step 5: Flashing the FPGA](#step-5-flashing-the-fpga)
-- [Program Execution](#program-execution)
-- [Challenges Encountered](#challenges-encountered)
-  - [Toolchain Compatibility Issues](#toolchain-compatibility-issues)
-  - [Hardware Accessibility](#hardware-accessibility)
-  - [Package Availability](#package-availability)
-- [Observations](#observations)
-- [Learning Outcomes](#learning-outcomes)
-- [Conclusion](#conclusion)
-- [Screenshots](#screenshots)
-- [References](#references)
+* [Objective](#objective)
+* [Introduction](#introduction)
+* [Hardware and Software Requirements](#hardware-and-software-requirements)
+* [Why Virtual Machine Instead of GitHub Codespaces?](#why-virtual-machine-instead-of-github-codespaces)
+* [Step 1: Cloning the Repository](#step-1-cloning-the-repository)
+* [Repository Structure](#repository-structure)
+* [Step 2: Installing Prerequisites](#step-2-installing-prerequisites)
+* [Step 3: FPGA Toolchain Setup](#step-3-fpga-toolchain-setup)
+* [Step 4: Build Flow](#step-4-build-flow)
+* [Step 5: Flashing the FPGA](#step-5-flashing-the-fpga)
+* [Program Execution](#program-execution)
+* [Challenges Encountered](#challenges-encountered)
+* [Observations](#observations)
+* [Results](#results)
+* [Learning Outcomes](#learning-outcomes)
+* [Future Work](#future-work)
+* [Conclusion](#conclusion)
+* [Screenshots](#screenshots)
+* [References](#references)
 
-## Objective
+---
+
+# Objective
 
 The objective of this task is to set up the FPGA development environment required for implementing a RISC-V design on an FPGA platform using open-source tools. This task focuses on repository setup, dependency installation, build flow understanding, flashing methodology, and FPGA deployment requirements.
 
@@ -35,11 +32,32 @@ The objective of this task is to set up the FPGA development environment require
 
 # Introduction
 
-Field Programmable Gate Arrays (FPGAs) are widely used for prototyping digital systems before fabrication. They provide a flexible platform where hardware designs can be synthesized, implemented, and tested without manufacturing a custom integrated circuit.
+Field Programmable Gate Arrays (FPGAs) are programmable integrated circuits that can be configured by the user after manufacturing. They provide a flexible platform for prototyping digital systems and validating hardware designs before fabrication.
 
 The open-source FPGA toolchain enables designers to perform synthesis, place-and-route, bitstream generation, and FPGA programming using freely available tools.
 
 This task focuses on preparing the FPGA development environment and understanding the implementation workflow required for FPGA-based RISC-V systems.
+
+---
+
+# Hardware and Software Requirements
+
+## Hardware
+
+* FPGA Development Board
+* USB Programming Cable
+* Host Computer
+
+## Software
+
+* Ubuntu Linux Virtual Machine
+* Git
+* GCC
+* RISC-V GNU Toolchain
+* Yosys
+* NextPNR
+* IceStorm
+* GTKWave
 
 ---
 
@@ -84,7 +102,24 @@ cd vsdfpga_labs
 
 ### Screenshot
 
-[Insert Screenshot: Repository Cloning]
+![Repository Clone](screenshots/clone.png)
+
+---
+
+# Repository Structure
+
+```text
+vsdfpga_labs/
+│
+├── README.md
+├── Makefile
+├── labs/
+├── scripts/
+├── rtl/
+└── screenshots/
+```
+
+The repository contains RTL files, build scripts, FPGA configuration files, and supporting resources required for FPGA implementation.
 
 ---
 
@@ -107,21 +142,6 @@ bison flex texinfo gperf libtool patchutils bc \
 zlib1g-dev libexpat1-dev gtkwave picocom -y
 ```
 
-### Purpose of Installed Packages
-
-| Package         | Purpose              |
-| --------------- | -------------------- |
-| git             | Version control      |
-| vim             | Text editing         |
-| build-essential | Compilation tools    |
-| autoconf        | Build automation     |
-| automake        | Makefile generation  |
-| flex            | Lexical analysis     |
-| bison           | Parser generation    |
-| gawk            | Text processing      |
-| gtkwave         | Waveform viewing     |
-| picocom         | Serial communication |
-
 ### Verification
 
 ```bash
@@ -134,7 +154,7 @@ riscv64-unknown-elf-gcc --version
 
 ### Screenshot
 
-[Insert Screenshot: Package Installation]
+![Prerequisites Installation](screenshots/prereq_install.png)
 
 ---
 
@@ -142,41 +162,33 @@ riscv64-unknown-elf-gcc --version
 
 The FPGA workflow requires several open-source EDA tools.
 
-### Yosys
+## Yosys
 
 Used for RTL synthesis.
-
-Verification:
 
 ```bash
 yosys -V
 ```
 
-### NextPNR
+## NextPNR
 
 Used for FPGA placement and routing.
-
-Verification:
 
 ```bash
 nextpnr-ice40 --version
 ```
 
-### IceStorm
+## IceStorm
 
 Used for FPGA bitstream generation.
-
-Verification:
 
 ```bash
 icepack -h
 ```
 
-### GTKWave
+## GTKWave
 
 Used for waveform analysis.
-
-Verification:
 
 ```bash
 gtkwave --version
@@ -184,7 +196,7 @@ gtkwave --version
 
 ### Screenshot
 
-[Insert Screenshot: FPGA Tool Installation]
+![FPGA Toolchain Installation](screenshots/yosys_etc_lib_install.png)
 
 ---
 
@@ -205,21 +217,15 @@ The build process is responsible for:
 * FPGA implementation preparation
 * Bitstream generation setup
 
----
-
 ## Build Verification Status
 
-The build process could not be completely validated in GitHub Codespaces.
+The build process was attempted in GitHub Codespaces but could not be fully validated due to FPGA toolchain compatibility issues and the inability to access physical FPGA hardware through a browser-based environment.
 
-During testing, compatibility issues were encountered between the FPGA toolchain versions available in the environment and those expected by the project configuration.
-
----
+The FPGA workflow was therefore continued using a Linux Virtual Machine with direct hardware access.
 
 ## Why the Makefile Was Not Modified
 
 The Makefile supplied with the project is designed for a specific FPGA implementation flow.
-
-Although certain synthesis commands could potentially be modified to accommodate different tool versions, such modifications were intentionally avoided.
 
 Changing synthesis parameters may:
 
@@ -234,7 +240,7 @@ To preserve consistency with the original project implementation, the Makefile w
 
 ### Screenshot
 
-[Insert Screenshot: Build Attempt]
+![Build Attempt](screenshots/makebuild.png)
 
 ---
 
@@ -248,6 +254,18 @@ After a successful build, the generated bitstream must be programmed onto the FP
 make flash
 ```
 
+### Opening Serial Terminal
+
+```bash
+make terminal
+```
+
+Connect the FPGA board using the USB programming cable and then execute the above command to establish serial communication with the FPGA.
+
+### Screenshot
+
+![Terminal](screenshots/treminal_ready.png)
+
 ### Purpose
 
 * Transfers FPGA bitstream to hardware.
@@ -260,15 +278,16 @@ Direct USB communication is required between the host system and FPGA board.
 
 This is one of the primary reasons a Virtual Machine environment was used instead of GitHub Codespaces.
 
-### Screenshot
-
-[Insert Screenshot: Flashing Process]
-
 ---
 
 # Program Execution
 
 Compilation and instruction analysis using both GCC and the RISC-V cross compiler were completed and documented in previous tasks.
+
+```bash
+vi riscv_logo.c
+```
+![riscv_logo](screenshots/riscv_logo.png)
 
 ### Previously Completed
 
@@ -277,14 +296,7 @@ Compilation and instruction analysis using both GCC and the RISC-V cross compile
 
 These procedures are therefore not repeated in this task.
 
-### Refer to Previous Tasks For
 
-* GCC compilation
-* RISC-V compilation
-* Assembly generation
-* Objdump analysis
-* Instruction verification
-* Functional validation
 
 ---
 
@@ -332,6 +344,19 @@ Compatible package versions available within the environment were installed.
 
 ---
 
+# Results
+
+* Repository cloned successfully.
+* Required dependencies installed successfully.
+* FPGA toolchain configured successfully.
+* Development environment verified.
+* Build flow studied and documented.
+* Flashing methodology understood.
+* FPGA communication through terminal verified.
+* Virtual Machine environment successfully prepared for FPGA development.
+
+---
+
 # Learning Outcomes
 
 Through this task, the following concepts were learned:
@@ -344,6 +369,16 @@ Through this task, the following concepts were learned:
 * Virtual Machine based FPGA development.
 * Toolchain compatibility considerations.
 * Makefile-based build automation.
+
+---
+
+# Future Work
+
+* Complete FPGA synthesis using the recommended toolchain versions.
+* Generate FPGA bitstream successfully.
+* Program the FPGA board with the generated design.
+* Verify execution of the RISC-V design on hardware.
+* Perform timing analysis and resource utilization studies.
 
 ---
 
