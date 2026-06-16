@@ -17,9 +17,7 @@
 * [Observations](#observations)
 * [Results](#results)
 * [Learning Outcomes](#learning-outcomes)
-* [Future Work](#future-work)
 * [Conclusion](#conclusion)
-* [Screenshots](#screenshots)
 * [References](#references)
 
 ---
@@ -293,7 +291,7 @@ Hex File:
 ```bash
 make riscv_logo.bram.hex
 ```
-!hex file](screenshots/Screenshot\(101\).png)
+![hex file](screenshots/Screenshot\(111\).png)
 
 ### Previously Completed
 
@@ -331,6 +329,7 @@ A Linux Virtual Machine environment was used instead of GitHub Codespaces.
 ## Package Availability
 
 Certain package names differed from those shown in reference documentation.
+eg: use fpga-icetorm in place of icestorm
 
 ### Resolution
 
@@ -378,16 +377,6 @@ Through this task, the following concepts were learned:
 
 ---
 
-# Future Work
-
-* Complete FPGA synthesis using the recommended toolchain versions.
-* Generate FPGA bitstream successfully.
-* Program the FPGA board with the generated design.
-* Verify execution of the RISC-V design on hardware.
-* Perform timing analysis and resource utilization studies.
-
----
-
 # Conclusion
 
 This task focused on preparing the FPGA development environment and understanding the workflow required for FPGA-based RISC-V implementation.
@@ -395,34 +384,6 @@ This task focused on preparing the FPGA development environment and understandin
 The repository was successfully cloned, dependencies were installed, FPGA development tools were configured, and the implementation flow was studied. Due to hardware-access requirements and environment limitations, the work was performed in a Linux Virtual Machine rather than GitHub Codespaces.
 
 The task provided valuable insight into FPGA development workflows, toolchain management, and hardware deployment requirements.
-
----
-
-# Screenshots
-
-## Repository Cloning
-
-[Insert Screenshot]
-
-## Dependency Installation
-
-[Insert Screenshot]
-
-## Toolchain Verification
-
-[Insert Screenshot]
-
-## Build Process
-
-[Insert Screenshot]
-
-## Flashing Process
-
-[Insert Screenshot]
-
-## Additional Outputs
-
-[Insert Screenshot]
 
 ---
 
