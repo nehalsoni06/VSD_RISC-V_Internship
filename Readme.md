@@ -24,5 +24,3 @@ This task focuses on setting up the FPGA development environment required for im
 
 The task also introduces the FPGA build and flashing workflow using the provided Makefile. Due to the hardware access limitations of GitHub Codespaces, the setup and verification were performed in a Linux Virtual Machine environment to enable direct communication with the FPGA board through USB.
 
-This exercise provides practical exposure to FPGA development workflows, toolchain configuration, hardware programming requirements, and the role of open-source EDA tools in implementing RISC-V based systems.
----
