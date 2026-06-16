@@ -240,7 +240,7 @@ To preserve consistency with the original project implementation, the Makefile w
 
 ### Screenshot
 
-![Build Attempt](screenshots/makebuild.png)
+![Build Attempt](screenshots/makebuildop.png)
 
 ---
 
@@ -288,6 +288,12 @@ Compilation and instruction analysis using both GCC and the RISC-V cross compile
 vi riscv_logo.c
 ```
 ![riscv_logo](screenshots/riscv_logo.png)
+![output](screenshots/Screenshot\(100\).png)
+Hex File:
+```bash
+make riscv_logo.bram.hex
+```
+!hex file](screenshots/Screenshot\(101\).png)
 
 ### Previously Completed
 
