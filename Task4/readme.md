@@ -353,16 +353,6 @@ gpio_reg   = 0x00000055   ← value held stable indefinitely
 ---
 
 
-### 4.6 Simulation Proof Screenshots
-
-**Compilation — zero elaboration errors:**
-
-![iverilog compile](screenshots/iverilog_compile.png)
-
-**VVP simulation run — UART output visible in terminal:**
-
-![vvp simulation](screenshots/vvp_simulation.png)
-
 ---
 
 ### 4.7 What Was Verified
@@ -424,6 +414,8 @@ gtkwave dump.vcd
 ```
 
 ---
+![outputfile](screenshots/rtl_outputfile.png)
+![wave](screenshots/rtlwave.png)
 
 ## Submission Checklist
 
