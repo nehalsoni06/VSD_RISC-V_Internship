@@ -88,6 +88,9 @@ The baseline RISC-V SoC (`riscv.v`) was analyzed to understand how the CPU commu
 | `mem_valid`     | `1`      | Strobe indicating an active memory transaction           |
 
 **Target peripheral address:** `32'h2000_0000`
+![CPU](screenshots/cpu_instanted.png)
+![peripherals](screenshots/local_periheral.png)
+![memory](screenshots/memory.png)
 
 ---
 
@@ -96,25 +99,23 @@ The baseline RISC-V SoC (`riscv.v`) was analyzed to understand how the CPU commu
 File: `rtl/gpio_ip.v`
 
 ```verilog
-`default_nettype none
-
 module gpio_ip (
-    input wire          clk,         // System Clock
-    input wire          rst_n,       // Active-low Reset
+    input         clk,
+    input         rst_n,
 
-    // Processor Bus Interface
-    input wire [31:0]   write_data,  // Data payload from CPU
-    input wire          write_en,    // Master peripheral write enable
-    input wire          read_en,     // Master peripheral read enable
-    output reg [31:0]   read_data,   // Latched data fed back to CPU
+    input  [31:0] write_data,
+    input         write_en,
 
-    // External Hardware Interface
-    output wire [31:0]  gpio_out     // Bound external hardware output pins
+    input         read_en,
+    output reg [31:0] read_data,
+
+    output [31:0] gpio_out
 );
 
+    // GPIO register storage
     reg [31:0] gpio_reg;
 
-    // WRITE LOGIC (Synchronous)
+    // Write logic (synchronous)
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n)
             gpio_reg <= 32'b0;
@@ -122,17 +123,15 @@ module gpio_ip (
             gpio_reg <= write_data;
     end
 
-    // READBACK LOGIC (Synchronous)
+    // Readback logic (synchronous)
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n)
             read_data <= 32'b0;
         else if (read_en)
             read_data <= gpio_reg;
-        else
-            read_data <= 32'b0;
     end
 
-    // PHYSICAL COUPLING
+    // GPIO output
     assign gpio_out = gpio_reg;
 
 endmodule
