@@ -172,7 +172,7 @@ gpio_ip GPIO (
     .gpio_out   (gpio_out)
 );
 ```
-
+<img width="253" height="143" alt="Screenshot 2026-06-21 110307" src="https://github.com/user-attachments/assets/92b6eab7-82c0-459d-9549-ef7b30881b8c" />
 ### 3. Readback Multiplexer
 
 ```verilog
@@ -183,8 +183,9 @@ always @(*) begin
         mem_rdata = ram_rdata;
 end
 ```
-
 ---
+![rtl](screenshots/rtl_compilation.png)
+![rtl](screenshots/rtl_op.png)
 
 ## Firmware: `gpio_test.bram.hex`
 
@@ -223,6 +224,7 @@ gpio_test.bram.hex        ← loaded by testbench at simulation start
 4. Repeats with additional test values to confirm register persistence
 
 ---
+
 
 ## Step 4: Simulation & Validation
 
@@ -284,7 +286,7 @@ riscv32-unknown-elf-objcopy \
 The resulting `gpio_test.bram.hex` is the file committed to this repository.
 
 ---
-
+![hexfile](screenshots/gpio_test_hexfile.png)
 ### 4.3 Testbench BRAM Preload
 
 Inside `sim/siml_tb.v`, the hex file is loaded into the simulated BRAM memory array before the clock starts:
@@ -349,6 +351,7 @@ gpio_reg   = 0x00000055   ← value held stable indefinitely
 ```
 
 ---
+
 
 ### 4.6 Simulation Proof Screenshots
 
