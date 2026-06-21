@@ -24,3 +24,43 @@ This task focuses on setting up the FPGA development environment required for im
 
 The task also introduces the FPGA build and flashing workflow using the provided Makefile. Due to the hardware access limitations of GitHub Codespaces, the setup and verification were performed in a Linux Virtual Machine environment to enable direct communication with the FPGA board through USB.
 
+
+## Task 4: GPIO IP Design and SoC Integration
+
+This task focuses on designing and integrating a simple GPIO IP core into a RISC-V based SoC system.
+
+### Objective
+To design, integrate, and verify a GPIO IP module accessible by the RISC-V CPU through a memory-mapped interface.
+
+### Work Done
+- Designed a simple GPIO IP RTL module  
+- Defined memory-mapped address space for GPIO access  
+- Integrated GPIO IP into the RISC-V SoC design  
+- Connected GPIO signals to external interface for testing  
+- Updated SoC interconnect for peripheral access  
+
+### CPU Interaction
+- The RISC-V CPU accesses GPIO using load/store instructions  
+- Memory-mapped I/O is used for reading and writing GPIO registers  
+- Address decoding logic routes CPU requests to the GPIO IP  
+
+### Verification
+- Functional simulation performed for read/write validation  
+- Waveforms analyzed using GTKWave  
+- GPIO behavior verified through test stimulus  
+- (Optional) UART/log output used for runtime verification  
+
+### Outcome
+- Understood memory-mapped peripheral architecture  
+- Learned CPU-to-IP communication in SoC design  
+- Gained practical experience in RTL integration and verification  
+- Verified correct GPIO functionality through simulation  
+
+---
+
+## Notes
+
+- Screenshots (simulation waveforms, RTL snapshots, FPGA build logs) can be added under each task section  
+- All tasks were verified using simulation and/or Linux-based development environments  
+- This project follows an open-source RISC-V hardware–software co-design workflow  
+
