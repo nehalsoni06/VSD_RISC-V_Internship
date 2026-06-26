@@ -353,7 +353,7 @@ endmodule
 ```
 
 <!-- SCREENSHOT_TB: Add siml_tb.v screenshot here -->
-> 📸 **[Insert siml_tb.v code screenshot here]**
+!testbench](screenshots/siml_tb.png)
 
 #### IP-level simulation (siml_tb.v):
 ```bash
@@ -386,7 +386,7 @@ passed
 ```
 
 <!-- SCREENSHOT_5: Add terminal simulation output screenshot here -->
-![simulation result](screenshots/.v_tbfilesimrel.png)
+![simulation result](screenshots/v_tbfile_simrel.png)
 
 
 ### SOC-Level Simulation Output
@@ -421,9 +421,21 @@ Passed
 ## Step 5: Hardware Validation (Optional)
 
 > This step requires the VSDSquadron FPGA board.
+> 
+> To generate BitStream:
+> ```bash
+> make build
+> ```
+> To execute
+> ```bash
+> sudo make flash
+> ```
 
 <!-- SCREENSHOT_7: Add board photo or UART output here if available -->
-> 📸 **[Insert board photo or hardware UART output here — Optional]**
+![Hardware](screenshots/tb_waveform.png)
+![Hardware](screenshots/tb_waveform.png)
+
+
 
 ---
 
