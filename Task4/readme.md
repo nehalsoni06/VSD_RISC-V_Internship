@@ -417,6 +417,9 @@ gtkwave dump.vcd
 ![outputfile](screenshots/rtl_outputfile.png)
 ![wave](screenshots/rtlwave.png)
 
+### C Program(hex file simulation)
+![simulation](screenshots/final_cprogram_output.png)
+
 ## Submission Checklist
 
 - [x] GPIO IP RTL file (`rtl/gpio_ip.v`)
