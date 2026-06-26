@@ -353,7 +353,7 @@ endmodule
 ```
 
 <!-- SCREENSHOT_TB: Add siml_tb.v screenshot here -->
-!testbench](screenshots/siml_tb.png)
+![testbench](screenshots/siml_tb.png)
 
 #### IP-level simulation (siml_tb.v):
 ```bash
@@ -432,8 +432,8 @@ Passed
 > ```
 
 <!-- SCREENSHOT_7: Add board photo or UART output here if available -->
-![Hardware](screenshots/tb_waveform.png)
-![Hardware](screenshots/tb_waveform.png)
+![Hardware](screenshots/hardware.png)
+![Hardware](screenshots/board.jpeg)
 
 
 
