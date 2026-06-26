@@ -65,8 +65,6 @@ This task focuses on:
 | `gpio_read_reg` | 32-bit | Reflects current pin state |
 | `offset`        | 2-bit  | Selects which register |
 
-<!-- SCREENSHOT_1: Add your planning notes or block diagram here -->
-> 📸 **[Insert planning diagram or notes screenshot here]**
 
 ---
 
@@ -262,7 +260,7 @@ int main() {
 ```
 
 <!-- SCREENSHOT_4: Add gpio_test.c screenshot here -->
-> 📸 **[Insert gpio_test.c code screenshot here]**
+![C_program](screenshots/cfile.png)
 
 ### What the C Program Does
 1. Sets GPIO direction (all outputs) via `GPIO_DIR`
