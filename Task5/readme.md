@@ -148,7 +148,7 @@ endmodule
 ```
 
 <!-- SCREENSHOT_2: Add screenshot of your gpio_ip.v in editor here -->
-> 📸 **[Insert gpio_ip.v editor screenshot here]**
+![RTL_file](screenshots/rtlfile.png)
 
 ### Register Behavior
 
@@ -216,7 +216,8 @@ localparam IO_GPIO_bit = 3;  // GPIO IP select bit
 ```
 
 <!-- SCREENSHOT_3: Add SOC integration code screenshot here -->
-> 📸 **[Insert riscv.v GPIO instantiation screenshot here]**
+![SOC_Instantation](screenshots/soc_inst1.png)
+![SOC_Instantation](screenshots/soc_inst2.png)
 
 ---
 
@@ -387,7 +388,8 @@ passed
 ```
 
 <!-- SCREENSHOT_5: Add terminal simulation output screenshot here -->
-> 📸 **[Insert siml_tb simulation terminal output screenshot here]**
+![simulation result](screenshots/.v_tbfilesimrel.png)
+
 
 ### SOC-Level Simulation Output
 ```
@@ -398,12 +400,12 @@ Passed
 ```
 
 <!-- SCREENSHOT_5b: Add SOC simulation output screenshot here -->
-> 📸 **[Insert SOC simulation terminal output screenshot here]**
+![simulation result](screenshots/code_simulationrel.png)
 
 ### Waveform (GTKWave)
 
 <!-- SCREENSHOT_6: Add GTKWave waveform screenshot here -->
-> 📸 **[Insert GTKWave waveform screenshot here]**
+![simulation result](screenshots/tb_waveform.png)
 
 ### Validation Results
 
