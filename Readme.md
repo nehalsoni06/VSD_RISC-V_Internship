@@ -12,55 +12,28 @@
 
 ### Task 1: Software Modelling and Verification Using GCC and RISC-V Toolchains
 
-This task focuses on understanding software modelling and functional verification using a simple C program. The program is compiled and executed using both the native GCC compiler and the RISC-V GCC cross-compiler. The objective is to verify that the same functionality is preserved across different architectures and to gain familiarity with the RISC-V software development workflow.
-
-### Task 2: Spike Debugging and Verification of a Ring Counter Program Using GCC and RISC-V Compiler
-
-This task focuses on understanding program execution using Spike Simulator and debugging RISC-V binaries at the instruction level. A Ring Counter software model is then compiled using both GCC and the RISC-V GCC compiler to verify functionality across architectures. The task provides practical exposure to simulation, debugging, and verification methodologies used in embedded systems, processor design, and VLSI development.
-
-### Task 3: FPGA Development Environment Setup and Build Flow
-
-This task focuses on setting up the FPGA development environment required for implementing a RISC-V design using open-source FPGA tools. The repository is cloned, dependencies are installed, and the FPGA toolchain consisting of Yosys, NextPNR, IceStorm, and GTKWave is configured and verified.
-
-The task also introduces the FPGA build and flashing workflow using the provided Makefile. Due to the hardware access limitations of GitHub Codespaces, the setup and verification were performed in a Linux Virtual Machine environment to enable direct communication with the FPGA board through USB.
-
-
-## Task 4: GPIO IP Design and SoC Integration
-
-This task focuses on designing and integrating a simple GPIO IP core into a RISC-V based SoC system.
-
-### Objective
-To design, integrate, and verify a GPIO IP module accessible by the RISC-V CPU through a memory-mapped interface.
-
-### Work Done
-- Designed a simple GPIO IP RTL module  
-- Defined memory-mapped address space for GPIO access  
-- Integrated GPIO IP into the RISC-V SoC design  
-- Connected GPIO signals to external interface for testing  
-- Updated SoC interconnect for peripheral access  
-
-### CPU Interaction
-- The RISC-V CPU accesses GPIO using load/store instructions  
-- Memory-mapped I/O is used for reading and writing GPIO registers  
-- Address decoding logic routes CPU requests to the GPIO IP  
-
-### Verification
-- Functional simulation performed for read/write validation  
-- Waveforms analyzed using GTKWave  
-- GPIO behavior verified through test stimulus  
-- (Optional) UART/log output used for runtime verification  
-
-### Outcome
-- Understood memory-mapped peripheral architecture  
-- Learned CPU-to-IP communication in SoC design  
-- Gained practical experience in RTL integration and verification  
-- Verified correct GPIO functionality through simulation  
+This task focuses on understanding software modelling and functional verification using a simple C program. The program is compiled and executed using both the native GCC compiler and the RISC-V GCC cross-compiler to verify consistent functionality across different architectures. The objective is to gain familiarity with the RISC-V software development workflow and cross-compilation process.
 
 ---
 
-## Notes
+### Task 2: Spike Debugging and Verification of a Ring Counter Program Using GCC and RISC-V Compiler
 
-- Screenshots (simulation waveforms, RTL snapshots, FPGA build logs) can be added under each task section  
-- All tasks were verified using simulation and/or Linux-based development environments  
-- This project follows an open-source RISC-V hardware–software co-design workflow  
+This task focuses on debugging RISC-V programs using the Spike Simulator. A Ring Counter software model is compiled using both GCC and the RISC-V GCC compiler, and its execution is analyzed at the instruction level. The objective is to understand processor execution, debugging techniques, and software verification methodologies used in embedded systems and VLSI design.
 
+---
+
+### Task 3: FPGA Development Environment Setup and Build Flow
+
+This task focuses on setting up the complete open-source FPGA development environment required for implementing a RISC-V design. The FPGA toolchain, including Yosys, NextPNR, IceStorm, and GTKWave, is installed and verified. The complete FPGA build, synthesis, place-and-route, and flashing workflow is explored using the provided Makefile, with validation performed in a Linux Virtual Machine due to GitHub Codespaces hardware limitations.
+
+---
+
+### Task 4: GPIO IP Design and SoC Integration
+
+This task focuses on designing and integrating a custom GPIO IP core into a RISC-V based System-on-Chip. The GPIO peripheral is connected through a memory-mapped interface, allowing the CPU to access it using standard load and store instructions. Functional simulation and waveform analysis are performed to verify correct peripheral operation and CPU-to-IP communication.
+
+---
+
+### Task 5: Multi-Register GPIO IP with Software Control
+
+This task extends the basic GPIO peripheral into a fully software-controlled multi-register IP core. A register map consisting of GPIO_DATA, GPIO_DIR, and GPIO_READ is implemented to support configurable GPIO direction, data output, and input readback. The enhanced IP is integrated into the RISC-V SoC, verified through IP-level and SoC-level simulations, controlled using a C program executed on the RISC-V processor, and finally synthesized, implemented, and validated on the VSDSquadron iCE40 FPGA board.
